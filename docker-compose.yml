@@ -1,0 +1,35 @@
+version: "3.7"
+services:
+  caddy:
+    image: lucaslorentz/caddy-docker-proxy:ci-alpine
+    ports:
+      - 80:80
+      - 443:443
+    environment:
+      - CADDY_INGRESS_NETWORKS=caddy
+    networks:
+      - caddy
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - caddy_data:/data
+      # - ./certs:/ssl/certs # for custom certs
+      # - /var/www/html:/var/www/html # for static content
+    restart: unless-stopped
+    labels:
+      ## custom acme endpoint
+      # caddy.acme_ca: <api_endpoint>
+      # caddy.acme_eab.key_id: <key_id> 
+      # caddy.acme_eab.mac_key: <mac_key>
+      ## redirects
+      # caddy_1: <old_domain>
+      # caddy_1.redir: <new_domain>{uri} permanent
+      # caddy_1.tls: /ssl/certs/custom.crt /ssl/certs/custom.key
+
+
+networks:
+  # run 'docker network create caddy'
+  caddy:
+    external: true
+
+volumes:
+  caddy_data: {}
