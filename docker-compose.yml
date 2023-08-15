@@ -15,7 +15,7 @@ services:
       # - ./certs:/ssl/certs # for custom certs
       # - /var/www/html:/var/www/html # for static content
     restart: unless-stopped
-    labels:
+    # labels:
       ## custom acme endpoint
       # caddy.acme_ca: <api_endpoint>
       # caddy.acme_eab.key_id: <key_id> 
