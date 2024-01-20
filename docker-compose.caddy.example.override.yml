@@ -1,0 +1,21 @@
+services:
+  caddy:
+    volumes:
+      # custom ssl certs
+      - ./certs:/ssl/certs
+      # custom static files
+      - /var/www/html/PATH:/var/www/html/PATH
+    labels:
+      # custom acme endpoint
+      caddy.acme_ca: https://acme...
+      caddy.acme_eab.key_id: xxx 
+      caddy.acme_eab.mac_key: xxx
+      # routes
+      caddy: my.domain.com
+      caddy.route.0_file_server: /PATH/*
+      caddy.route.0_file_server.root: "/var/www/html"
+      caddy.route.1_reverse_proxy: "{{upstreams 80}}"
+      # redirects
+      caddy_1: some.domain.com
+      caddy_1.redir: https://some.other.domain.com{uri} permanent
+      caddy_1.tls: /ssl/certs/my.crt /ssl/certs/my.key
