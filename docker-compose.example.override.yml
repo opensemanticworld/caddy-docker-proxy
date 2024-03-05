@@ -1,7 +1,7 @@
 services:
   caddy:
     networks:
-      # join the default network of an already running compose stack without alternating it (see also networks below)
+      # reach the default network of an already running compose stack (e.g. 'some-compose-stack_some-container:80') without alternating it (see also networks below)
       - some-compose-stack_default
     extra_hosts:
       # reach the host network, e.g. 'host.docker.internal:8080' from within the container
