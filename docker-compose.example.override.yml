@@ -1,5 +1,11 @@
 services:
   caddy:
+    networks:
+      # join the default network of an already running compose stack without alternating it (see also networks below)
+      - some-compose-stack_default
+    extra_hosts:
+      # reach the host network, e.g. 'host.docker.internal:8080' from within the container
+      - "host.docker.internal:host-gateway"
     volumes:
       # custom ssl certs
       - ./certs:/ssl/certs
@@ -19,3 +25,8 @@ services:
       caddy_1: some.domain.com
       caddy_1.redir: https://some.other.domain.com{uri} permanent
       caddy_1.tls: /ssl/certs/my.crt /ssl/certs/my.key
+
+networks:
+  # define default network of an already running compose stack as external (see service.caddy.networks above)
+  some-compose-stack_default:
+    external: true
