@@ -1,0 +1,7 @@
+services:
+  caddy:
+    labels:
+      # custom acme endpoint
+      caddy.acme_ca: "${API_ENDPOINT}"
+      caddy.acme_eab.key_id: "${ACCOUNT_ID}" 
+      caddy.acme_eab.mac_key: "${MAC_KEY}"
