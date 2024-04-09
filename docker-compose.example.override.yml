@@ -25,6 +25,8 @@ services:
       caddy_1: some.domain.com
       caddy_1.redir: https://some.other.domain.com{uri} permanent
       caddy_1.tls: /ssl/certs/my.crt /ssl/certs/my.key
+      # basic auth see: https://caddyserver.com/docs/caddyfile/directives/basicauth
+      caddy.basicauth.<username>: <hashed_password_with_all_$_replaced_with_$$>
 
 networks:
   # define default network of an already running compose stack as external (see service.caddy.networks above)
