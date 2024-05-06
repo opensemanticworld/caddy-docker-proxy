@@ -20,7 +20,7 @@ services:
       caddy.1_handle_path: /docs/*
       caddy.1_handle_path.reverse_proxy: "{{upstreams 8080}}"
       caddy.2_handle_path: /redoc/*
-      caddy.2_handle_path.reverse_proxy: "{{upstreams 8080}}
+      caddy.2_handle_path.reverse_proxy: "{{upstreams 8080}}"
       # routes
       caddy: my.domain.com
       caddy.route.0_file_server: /PATH/*
