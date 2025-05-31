@@ -34,6 +34,11 @@ services:
       caddy.basicauth.<username>: <hashed_password_with_all_$_replaced_with_$$>
       # CORS
       caddy.header.Access-Control-Allow-Origin: "*"
+      # Firewall, see https://github.com/lucaslorentz/caddy-docker-proxy/wiki/private:-reverse-proxy-only-for-certain-remote-IP's
+      # _my_ip_: placeholder for one or multiple space separated IPs
+      # private_ranges: Placeholder for all private IPs
+      caddy.@denied.not_0: "remote_ip _my_ip_ private_ranges"
+      caddy.abort: "@denied"
 
 networks:
   # define default network of an already running compose stack as external (see service.caddy.networks above)
