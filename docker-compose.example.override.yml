@@ -3,6 +3,17 @@ services:
     networks:
       # reach the default network of an already running compose stack (e.g. 'some-compose-stack_some-container:80') without alternating it (see also networks below)
       - some-compose-stack_default
+    # networks:
+    #   caddy:
+    #     # Point public hostnames at Caddy's internal IP to avoid NAT-hairpin
+    #     # timeouts. Internal traffic then flows client -> Caddy (TLS) -> backend
+    #     # with correct SNI/cert. Keep in sync with Caddy's label domains.
+    #     # Needed when a container calls a public domain served by Caddy - its own
+    #     # (e.g. MediaWiki callbacks, OIDC) or another container's (service-to-service).
+    #     aliases:
+    #       - terravac.cloud
+    #       - drawio.terravac.cloud
+    #       - db.terravac.cloud
     extra_hosts:
       # reach the host network, e.g. 'host.docker.internal:8080' from within the container
       - "host.docker.internal:host-gateway"
